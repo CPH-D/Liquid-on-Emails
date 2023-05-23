@@ -423,7 +423,7 @@
                                           <tbody>
                                              <tr>
                                                 <td class="dw db" align="left">
-                                                   <img class="image" src="assets/flannel-shirt.jpeg"
+                                                   <img class="image" src="assets/bright-white-notch-neck-tee.jpg"
                                                       alt="Flannel Shirt" style="display: block; border: none;"
                                                       width="130">
                                                 </td>
@@ -695,6 +695,73 @@
       src="assets/box-e031119f9e9e307a08fa610f85dbfb52.html"></iframe><iframe id="_hjSafeContext_5918655"
       title="_hjSafeContext" tabindex="-1" aria-hidden="true" src="assets/a.html"
       style="display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;"></iframe>
+
+   <div id="result"></div>
+
+   <!--for development-->
+   <script src="https://cdn.jsdelivr.net/npm/liquidjs/dist/liquid.browser.umd.js"></script>
+
+   <script>
+      const template = document.querySelector('[type="text/template"]')
+      const result = document.querySelector('#result')
+      const engine = new liquidjs.Liquid()
+
+      engine
+
+         .parseAndRender(template.innerHTML, {
+            customer: {
+               id: "998877",
+               first_name: "John",
+               last_name: "Doe",
+               email: "johndoe123@gmail.com",
+            },
+            order: {
+               id: "0123456789",
+               tracking_url: "https://luckybrand.com/tracking?utm_source=transactional&utm_medium=email&utm_campaign=tracking_package",
+               shipping_street: "22nd Street",
+               shipping_street2: "",
+               shipping_city: "Bakersfield",
+               shipping_state: "CA",
+               shipping_country: "US",
+               shipping_zipcode: "93301",
+               billing_street: "2023 22nd Street",
+               billing_street2: "",
+               billing_city: "Bakersfield",
+               billing_state: "CA",
+               billing_country: "US",
+               billing_zipcode: "99011",
+               payment_type: "Visa",
+               items_total: 4,
+               items_id: "98765432101, 98765432102, 98765432103, 98765432104",
+               items_page: "https://www.luckybrand.com/venice-burnout-notch-neck-tee/7M62751.html?dwvar_7M62751_color=460&dwvar_7M62751_dimension=*N&quantity=1, https://www.luckybrand.com/venice-burnout-notch-neck-tee/7M62751.html?dwvar_7M62751_color=610&dwvar_7M62751_dimension=*N&quantity=1, https://www.luckybrand.com/venice-burnout-notch-neck-tee/7M62751.html?dwvar_7M62751_color=701&dwvar_7M62751_dimension=*N&quantity=1, https://www.luckybrand.com/venice-burnout-notch-neck-tee/7M62751.html?dwvar_7M62751_color=110&dwvar_7M62751_dimension=*N&quantity=1",
+               items_image: "https://localhost:5500/assets/bright-white-notch-neck-tee.jpg, https://localhost:5500/assets/sand-storm-notch-neck-tee.jpeg",
+               items_title: "Venice Burnout Notch Neck Tee, Plaid Workwear Cloud Flannel",
+               items_color: "SAND STORM, TRUE RED, MINERAL YELLOW, BRIGHT WHITE",
+               items_style: "1A2B3C4D0, 1A2B3C4D1, 1A2B3C4D2",
+               item_quantity: "1, 2, 1",
+               item_price: "$24.15, $48.30, $19.15",
+               order_total: "30.00",
+               subtotal: "$91.60",
+               shipping_price: "$10.00",
+               sales_tax: "$7.62",
+            },
+            company: {
+               name: "Lucky Brand",
+               street: "12 Hollywood Blvd",
+               street2: "Suit 456",
+               city: "Los Angeles",
+               state: "CA",
+               country: "US",
+               zipcode: "90001",
+               contact_page: "https://www.luckybrand.com/contact-us.html?utm_source=transactional&utm_medium=email&utm_campaign=contact-us",
+               privacy_page: "https://www.luckybrand.com/privacy-policy.html?utm_source=transactional&utm_medium=email&utm_campaign=privacy+page",
+            },
+         })
+
+         .then(html => result.innerHTML = html)
+   </script>
+
+
 </body>
 
 </html>
