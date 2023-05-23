@@ -121,6 +121,16 @@
 
    <script type="text/template">
 
+      {% assign items = order.items_id | split: ", " %}
+      {% assign items_id = order.items_id | split: ", " %}
+      {% assign items_title = order.items_title | split: ", " %}
+      {% assign items_color = order.items_color | split: ", " %}
+      {% assign items_style = order.items_style | split: ", " %}
+      {% assign items_page = order.items_page | split: ", " %}
+      {% assign items_image = order.items_image | split: ", " %}
+      {% assign items_quantity = order.items_quantity | split: ", " %}
+      {% assign items_price = order.items_price | split: ", " %}
+
    <!-- START OF PREVIEW TEXT -->
    <div style="display: none; max-height: 0; overflow: hidden;">
       Your Lucky Brand Order #12345678 Has Been Shipped...
@@ -416,6 +426,8 @@
                      <!-- END OF YOUR ITEMS TITLE -->
 
                      <!-- START OF YOUR ITEMS DETAILS -->
+                     {%- for item in items -%}                                        
+
                      <tr>
                         <td style="padding-top: 10px;" align="center">
                            <table class="responsive-table" role="presentation" width="540" cellspacing="0"
@@ -428,9 +440,11 @@
                                           <tbody>
                                              <tr>
                                                 <td class="dw db" align="left">
-                                                   <img class="image" src="assets/bright-white-notch-neck-tee.jpg"
-                                                      alt="Flannel Shirt" style="display: block; border: none;"
+                                                   <a href="{{items_page[forloop.index0]}}" target="_blank">
+                                                   <img class="image" src="{{items_image[forloop.index0]}}"
+                                                      alt="{{items_title[forloop.index0]}}" style="display: block; border: none;"
                                                       width="130">
+                                                   </a>  
                                                 </td>
                                              </tr>
                                           </tbody>
@@ -449,7 +463,7 @@
                                                 <td class="dw db" align="left">
                                                    <h2
                                                       style="Margin: 0; color: #1B1715; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; line-height: 28px; text-transform: uppercase; letter-spacing: 2px;">
-                                                      Plaid Workwear Cloud Flannel
+                                                      {{items_title[forloop.index0]}}
                                                    </h2>
                                                 </td>
                                              </tr>
@@ -458,15 +472,15 @@
                                                 <td class="dw db" align="left">
                                                    <p
                                                       style="Margin: 0; color: #1B1715; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: normal; line-height: 22px;">
-                                                      Item #: 123456789123 <br>
-                                                      Style: 1A123456 <br>
-                                                      Color: BLACK / NATURAL COMBO <br>
-                                                      Quantity: 1
+                                                      Item #: {{items_id[forloop.index0]}} <br>
+                                                      Style: {{items_style[forloop.index0]}} <br>
+                                                      Color: {{items_color[forloop.index0]}} <br>
+                                                      Quantity: {{items_quantity[forloop.index0]}}
                                                    </p>
 
                                                    <p
                                                       style="Margin: 0; color: #1B1715; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: normal; line-height: 22px; padding-top: 10px;">
-                                                      Price: $55.65
+                                                      Price: ${{items_price[forloop.index0]}}
                                                    </p>
                                                 </td>
                                              </tr>
@@ -478,6 +492,7 @@
                            </table>
                         </td>
                      </tr>
+                     {% endfor %}
                      <!-- END OF YOUR ITEMS DETAILS -->
 
                      <!-- START OF BORDER -->
@@ -695,25 +710,6 @@
       </tbody>
    </table>
 
-   <ul>
-      {% assign items = order.items_id | split: ", " %}
-
-      {% assign items_id = order.items_id | split: ", " %}
-      {% assign items_title = order.items_title | split: ", " %}
-      {% assign items_color = order.items_color | split: ", " %}
-      {% assign items_style = order.items_style | split: ", " %}
-      {% assign items_page = order.items_page | split: ", " %}
-      {% assign items_image = order.items_image | split: ", " %}
-      {% assign items_quantity = order.items_quantity | split: ", " %}
-      {% assign items_price = order.items_price | split: ", " %}
-
-      {%- for item in items -%}
-      <a href="{{items_page[forloop.index0]}}">
-         <img src="{{items_image[forloop.index0]}}" alt="error displaying">
-      </a>
-      {% endfor %}
-   </ul>
-
    </script>
 
    <div id="result">
@@ -760,8 +756,8 @@
                items_title: "Venice Burnout Notch Neck Tee, Plaid Workwear Cloud Flannel, Striped Short Sleeve, Steer Skull Tee",
                items_color: "SAND STORM, TRUE RED, MINERAL YELLOW, BRIGHT WHITE",
                items_style: "1A2B3C4D0, 1A2B3C4D1, 1A2B3C4D2, 1A2B3C4D3",
-               items_quantity: "1, 2, 3, 4",
-               items_price: "24.50, 49.00, 73.50, 98.00",
+               items_quantity: "1, 2, 1, 3",
+               items_price: "24.50, 49.00, 19.50, 73.50",
                total: "39.50",
                subtotal: "27.50",
                shipping_price: "7.00",
