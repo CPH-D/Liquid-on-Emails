@@ -118,6 +118,9 @@
 
 <body id="body"
    style="Margin: 0 !important; padding: 0 !important; background-color: #FAFAFA; font-family: Arial, Helvetica, sans-serif; font-size: 18px; line-height: 1.2; color: #000000;">
+
+   <script type="text/template">
+
    <!-- START OF PREVIEW TEXT -->
    <div style="display: none; max-height: 0; overflow: hidden;">
       Your Lucky Brand Order #12345678 Has Been Shipped...
@@ -145,7 +148,7 @@
                               <tbody>
                                  <tr>
                                     <td align="center">
-                                       <a href="https://www.luckybrand.com/" target="_blank">
+                                       <a href="{{company.home_page}}" target="_blank">
                                           <img src="assets/lb-logo.jpeg" alt="Lucky Brand Logo"
                                              style="display: block; border: none;" width="240">
                                        </a>
@@ -208,7 +211,7 @@
                                     <td style="color: #1B1715; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: normal; line-height: 20px;"
                                        align="center">
                                        <p style="Margin: 0;">
-                                          Order number #12345678 has shipped! <br>
+                                          Order number {{ order.id }} has shipped! <br>
                                           See below for package tracking information.
                                        </p>
                                     </td>
@@ -227,7 +230,7 @@
                               <tbody>
                                  <tr>
                                     <td align="center">
-                                       <a href="https://www.luckybrand.com/" target="_blank"
+                                       <a href="{{order.tracking_url}}" target="_blank"
                                           style="font-size: 14px; font-family: Arial, Helvetica, sans-serif; color: #FFFFFF; text-decoration: none; border-radius: 0px; -webkit-border-radius: 0px; background-color: #000000; border-top: 10px solid #000000; border-bottom: 10px solid #000000; border-right: 30px solid #000000; border-left: 30px solid #000000; display: inline-block; text-transform: uppercase;">Track
                                           Package</a>
                                     </td>
@@ -295,14 +298,15 @@
                                                 <td class="dw db" align="left">
                                                    <p
                                                       style="Margin: 0; color: #1B1715; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: normal; line-height: 22px; text-transform: uppercase;">
-                                                      John Doe
+                                                      {{customer.first_name}} {{customer.last_name}}
                                                    </p>
 
                                                    <p
                                                       style="Margin: 0; color: #1B1715; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: normal; line-height: 22px;">
-                                                      8901 S 620th Rd <br>
-                                                      Miami, Florida 39101 <br>
-                                                      USA
+                                                      {{order.shipping_street}} <br>
+                                                      {{order.shipping_city}}, {{order.shipping_state}}
+                                                      {{order.shipping_zipcode}} <br>
+                                                      {{order.shipping_country}}
                                                    </p>
                                                 </td>
                                              </tr>
@@ -331,14 +335,15 @@
                                                 <td class="dw db" align="right">
                                                    <p
                                                       style="Margin: 0; color: #1B1715; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: normal; line-height: 22px; text-transform: uppercase;">
-                                                      John Doe
+                                                      {{customer.first_name}} {{customer.last_name}}
                                                    </p>
 
                                                    <p
                                                       style="Margin: 0; color: #1B1715; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: normal; line-height: 22px;">
-                                                      8901 S 620th Rd <br>
-                                                      Miami, Florida 39101 <br>
-                                                      USA
+                                                      {{order.billing_street}} <br>
+                                                      {{order.billing_city}}, {{order.billing_state}}
+                                                      {{order.billing_zipcode}}<br>
+                                                      {{order.billing_country}}
                                                    </p>
                                                 </td>
                                              </tr>
@@ -367,7 +372,7 @@
 
                                        <p
                                           style="Margin: 0; color: #1B1715; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: normal; line-height: 22px; padding-top: 5px;">
-                                          PayPal
+                                          {{order.payment_type}}
                                        </p>
                                     </td>
                                  </tr>
@@ -507,7 +512,7 @@
                                     <td width="30%" align="right">
                                        <p
                                           style="Margin: 0; color: #1B1715; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: normal; line-height: 22px; padding-top: 10px; padding-right: 10px;">
-                                          $55.65
+                                          ${{order.subtotal}}
                                        </p>
                                     </td>
                                  </tr>
@@ -523,7 +528,7 @@
                                     <td width="30%" align="right">
                                        <p
                                           style="Margin: 0; color: #1B1715; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: normal; line-height: 22px; padding-top: 10px; padding-right: 10px;">
-                                          $10.00
+                                          ${{order.shipping_price}}
                                        </p>
                                     </td>
                                  </tr>
@@ -539,7 +544,7 @@
                                     <td width="30%" align="right">
                                        <p
                                           style="Margin: 0; color: #1B1715; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: normal; line-height: 22px; padding-top: 10px; padding-right: 10px;">
-                                          $0.00
+                                          ${{order.sales_tax}}
                                        </p>
                                     </td>
                                  </tr>
@@ -581,7 +586,7 @@
                                     <td width="30%" align="right">
                                        <p
                                           style="Margin: 0; color: #1B1715; font-family: Arial, Helvetica, sans-serif; font-size: 18px; font-weight: bold; line-height: 1; padding-top: 10px; padding-right: 10px;">
-                                          $65.65
+                                          ${{order.total}}
                                        </p>
                                     </td>
                                  </tr>
@@ -640,7 +645,7 @@
                                  <tr>
                                     <td style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; line-height: 20px;"
                                        width="50" align="right">
-                                       <a style="color: #1B1715;" href="https://www.luckybrand.com/" target="_blank">
+                                       <a style="color: #1B1715;" href="{{company.contact_page}}" target="_blank">
                                           Contact Us
                                        </a>
                                     </td>
@@ -651,7 +656,7 @@
 
                                     <td style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; line-height: 20px;"
                                        width="50" align="left">
-                                       <a style="color: #1B1715;" href="https://www.luckybrand.com/" target="_blank">
+                                       <a style="color: #1B1715;" href="{{company.privacy_page}}" target="_blank">
                                           Privacy Policy
                                        </a>
                                     </td>
@@ -672,7 +677,8 @@
                                     <td style="color: #1B1715; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; line-height: 20px;"
                                        align="center">
                                        <p style="Margin: 0;">
-                                          Lucky OpCo LLC | 3880 N Mission Road | Los Angeles, CA 90031 | United States
+                                          {{company.name}} | {{company.street}} {{company.street2}} | {{company.city}},
+                                          {{company.state}} {{company.zipcode}} | {{company.country}}
                                        </p>
                                     </td>
                                  </tr>
@@ -689,14 +695,11 @@
       </tbody>
    </table>
 
-   <iframe
-      style="display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;"
-      name="_hjRemoteVarsFrame" title="_hjRemoteVarsFrame" tabindex="-1" aria-hidden="true" id="_hjRemoteVarsFrame"
-      src="assets/box-e031119f9e9e307a08fa610f85dbfb52.html"></iframe><iframe id="_hjSafeContext_5918655"
-      title="_hjSafeContext" tabindex="-1" aria-hidden="true" src="assets/a.html"
-      style="display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;"></iframe>
+   </script>
 
-   <div id="result"></div>
+   <div id="result">
+
+   </div>
 
    <!--for development-->
    <script src="https://cdn.jsdelivr.net/npm/liquidjs/dist/liquid.browser.umd.js"></script>
@@ -711,25 +714,25 @@
          .parseAndRender(template.innerHTML, {
             customer: {
                id: "998877",
-               first_name: "John",
-               last_name: "Doe",
-               email: "johndoe123@gmail.com",
+               first_name: "James",
+               last_name: "Smith",
+               email: "jamessmith123@gmail.com",
             },
             order: {
-               id: "0123456789",
+               id: "3052220238",
                tracking_url: "https://luckybrand.com/tracking?utm_source=transactional&utm_medium=email&utm_campaign=tracking_package",
                shipping_street: "22nd Street",
                shipping_street2: "",
                shipping_city: "Bakersfield",
                shipping_state: "CA",
-               shipping_country: "US",
+               shipping_country: "USA",
                shipping_zipcode: "93301",
-               billing_street: "2023 22nd Street",
+               billing_street: "P.O. Box 4444",
                billing_street2: "",
                billing_city: "Bakersfield",
                billing_state: "CA",
-               billing_country: "US",
-               billing_zipcode: "99011",
+               billing_country: "USA",
+               billing_zipcode: "93302",
                payment_type: "Visa",
                items_total: 4,
                items_id: "98765432101, 98765432102, 98765432103, 98765432104",
@@ -739,20 +742,21 @@
                items_color: "SAND STORM, TRUE RED, MINERAL YELLOW, BRIGHT WHITE",
                items_style: "1A2B3C4D0, 1A2B3C4D1, 1A2B3C4D2",
                item_quantity: "1, 2, 1",
-               item_price: "$24.15, $48.30, $19.15",
-               order_total: "30.00",
-               subtotal: "$91.60",
-               shipping_price: "$10.00",
-               sales_tax: "$7.62",
+               item_price: "24.50, 49.00, 19.50",
+               total: "39.50",
+               subtotal: "27.50",
+               shipping_price: "7.00",
+               sales_tax: "5.00",
             },
             company: {
-               name: "Lucky Brand",
+               name: "Lucky Brand Clothing",
                street: "12 Hollywood Blvd",
-               street2: "Suit 456",
+               street2: "Suit 2",
                city: "Los Angeles",
                state: "CA",
-               country: "US",
+               country: "United States",
                zipcode: "90001",
+               home_page: "https://www.luckybrand.com/?utm_source=transactional&utm_medium=email&utm_campaign=home+page",
                contact_page: "https://www.luckybrand.com/contact-us.html?utm_source=transactional&utm_medium=email&utm_campaign=contact-us",
                privacy_page: "https://www.luckybrand.com/privacy-policy.html?utm_source=transactional&utm_medium=email&utm_campaign=privacy+page",
             },
